@@ -9,12 +9,12 @@ module.exports = (app) => {
 
   app.post("/api/friends", (req, res) => {
     var newFriend = req.body.scores;
-    var totalDiff = 0;
-    var matchIndex;
+    var matchIndex = 100;
     var bestMatch;
 
     friendsData.forEach((friend) => {
       newFriend.forEach((scores) => {
+        var totalDiff = 0;
         totalDiff += (Math.abs(parseInt(friend.scores) - parseInt(scores)));
         if (totalDiff <= matchIndex) {
           matchIndex = totalDiff;
@@ -22,6 +22,7 @@ module.exports = (app) => {
         }
       });
     });
+    res.json(bestMatch)
     friendsData.push(req.body);
   });
 };

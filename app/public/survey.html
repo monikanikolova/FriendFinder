@@ -169,16 +169,13 @@
     <!-- Modal -->
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h2 class="modal-title"><strong>Yo Best Match!</strong></h2>
         </div>
         <div class="modal-body">
             <h2 id="match-name"></h2>
             <img id="match-img" src="" alt="" width="200px" height="auto">
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+       
     </div>
 </body>
 
@@ -205,12 +202,14 @@
                     $("#q10").val()
                 ]
             };
-            $.post("/api/friends", userData, (data) => {
+            $.post("/api/friends", newFriend, (data) => {
+                console.log(data);
+                
                 // Grab the result from the AJAX post and the best match's info is displayed 
                 $("#match-name").text(data.name);
                 $("#match-img").attr("src", data.photo);
                 // Display best match with modal
-                $("#results-modal").modal("toggle");
+                $("#results-modal").modal("hide");
                 // Clear form
                 $("#name").val("");
                 $("#photo").val("");
