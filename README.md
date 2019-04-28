@@ -5,4 +5,4 @@ FriendFinder is application that delivers a survey to the user asking to respond
 
 
 
-Link to deployed application https://tranquil-journey-95249.herokuapp.com/survey
+Link to deployed application https://tranquil-journey-95249.herokuapp.com/
