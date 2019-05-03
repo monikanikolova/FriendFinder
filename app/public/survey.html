@@ -15,16 +15,16 @@
 
 <body>
     <div class="container">
-        
+        <!-- Survey -->
         <h2>Survey Questions</h2>
         <hr>
         <h3>
             <strong>About You</strong>
         </h3>
         <h4>Name (Required)</h4>
-        <input type="text" id="name" class="form-control" required="">
+        <input type="text" id="name" class="required" required="">
         <h4>Link to Photo Image (Required)</h4>
-        <input type="text" id="photo" class="form-control" required="">
+        <input type="text" id="photo" class="required" required="">
         <hr>
 
         <h2>
@@ -32,7 +32,7 @@
         </h2>
         <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
         <br>
-        <select id="q1">
+        <select id="q1" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -45,7 +45,7 @@
         </h2>
         <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
         <br>
-        <select id="q2">
+        <select id="q2" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -58,7 +58,7 @@
         </h2>
         <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
         <br>
-        <select id="q3">
+        <select id="q3" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -71,7 +71,7 @@
         </h2>
         <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
         <br>
-        <select id="q4">
+        <select id="q4" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -84,7 +84,7 @@
         </h2>
         <h4>People can rarely upset you.</h4>
         <br>
-        <select id="q5">
+        <select id="q5" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -97,7 +97,7 @@
         </h2>
         <h4>It is often difficult for you to relate to other people’s feelings.</h4>
         <br>
-        <select id="q6">
+        <select id="q6" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -110,7 +110,7 @@
         </h2>
         <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
         <br>
-        <select id="q7">
+        <select id="q7" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -123,7 +123,7 @@
         </h2>
         <h4>You rarely get carried away by fantasies and ideas.</h4>
         <br>
-        <select id="q8">
+        <select id="q8" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -137,7 +137,7 @@
         <h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or
             not.</h4>
         <br>
-        <select id="q9">
+        <select id="q9" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -150,7 +150,7 @@
         </h2>
         <h4>You feel more energetic after spending time with a group of people.</h4>
         <br>
-        <select id="q10">
+        <select id="q10" class="option-select">
             <option value="" disabled selected>Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -165,7 +165,7 @@
             Submit</button>
 
     </div>
-    
+
     <!-- Modal -->
     <div class="modal-content">
         <div class="modal-header">
@@ -175,7 +175,7 @@
             <h2 id="match-name"></h2>
             <img id="match-img" src="" alt="" width="200px" height="auto">
         </div>
-       
+
     </div>
 </body>
 
@@ -183,47 +183,64 @@
     $(document).ready(() => {
         $("#submit").on("click", (event) => {
             event.preventDefault();
-            //Needs Validation!!
+            //Validation!!
+            function validateForm() {
+                var isValid = true;
+                $('.required').each(() => {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                $(".option-select").each(() => {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
 
-            // Create an object to capture user's data
-            var newUserData = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
-                scores: [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val()
-                ]
+            if (validateForm() == true) {
+
+                // Create an object to capture user's data
+                var newUserData = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q10").val()
+                    ]
+                };
+                $.post("/api/friends", newUserData, (data) => {
+                    console.log(data);
+
+                    // Grab the result from the AJAX post and the best match's info is displayed 
+                    $("#match-name").text(data.name);
+                    $("#match-img").attr("src", data.photo);
+                    // Display best match with modal
+                    $(".modal-content").modal("hide");
+                    // Clear form
+                    $("#name").val("");
+                    $("#photo").val("");
+                    $("#q1").val("");
+                    $("#q2").val("");
+                    $("#q3").val("");
+                    $("#q4").val("");
+                    $("#q5").val("");
+                    $("#q6").val("");
+                    $("#q7").val("");
+                    $("#q8").val("");
+                    $("#q9").val("");
+                    $("#q10").val("");
+                });
             };
-            $.post("/api/friends", newUserData, (data) => {
-                console.log(data);
-                
-                // Grab the result from the AJAX post and the best match's info is displayed 
-                $("#match-name").text(data.name);
-                $("#match-img").attr("src", data.photo);
-                // Display best match with modal
-                $(".modal-content").modal("hide");
-                // Clear form
-                $("#name").val("");
-                $("#photo").val("");
-                $("#q1").val("");
-                $("#q2").val("");
-                $("#q3").val("");
-                $("#q4").val("");
-                $("#q5").val("");
-                $("#q6").val("");
-                $("#q7").val("");
-                $("#q8").val("");
-                $("#q9").val("");
-                $("#q10").val("");
-            });
         });
     });
 </script>
