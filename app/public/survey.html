@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 </head>
 
 <body>
@@ -183,24 +181,6 @@
     $(document).ready(() => {
         $("#submit").on("click", (event) => {
             event.preventDefault();
-            //Validation!!
-            function validateForm() {
-                var isValid = true;
-                $('.required').each(() => {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                    }
-                });
-                $(".option-select").each(() => {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                    }
-                });
-                return isValid;
-            }
-
-            if (validateForm() == true) {
-
                 // Create an object to capture user's data
                 var newUserData = {
                     name: $("#name").val(),
@@ -240,7 +220,7 @@
                     $("#q9").val("");
                     $("#q10").val("");
                 });
-            };
+            
         });
     });
 </script>
