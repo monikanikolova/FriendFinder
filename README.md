@@ -10,7 +10,6 @@ Demo of the application:  https://shrouded-river-25381.herokuapp.com/
 ## Built With
 
 * Node.js
-* mySQL
 * Express
 
 
